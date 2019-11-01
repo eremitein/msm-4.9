@@ -124,6 +124,14 @@ ifdef CONFIG_SND_SOC_MAX98927
         MAX98927_OBJS += max98927.o
 endif
 
+ifdef CONFIG_SND_SOC_TAS2557
+        TAS2557_OBJS += tas2557-core.o
+        TAS2557_OBJS += tas2557-misc.o
+        TAS2557_OBJS += tas2557-codec.o
+        TAS2557_OBJS += tas2557-regmap.o
+        TAS2557_OBJS += tiload.o
+endif
+
 ifdef CONFIG_SND_SOC_MSM_STUB
 	STUB_OBJS += msm_stub.o
 endif
@@ -168,7 +176,6 @@ CDEFINES +=	-DANI_LITTLE_BYTE_ENDIAN \
 		-DANI_OS_TYPE_ANDROID=6 \
 		-DPTT_SOCK_SVC_ENABLE \
 		-Wall\
-		-Werror\
 		-D__linux__
 
 KBUILD_CPPFLAGS += $(CDEFINES)
@@ -216,6 +223,9 @@ wsa881x_analog_dlkm-y := $(WSA881X_ANALOG_OBJS)
 
 obj-$(CONFIG_SND_SOC_MAX98927) += max98927_dlkm.o
 max98927_dlkm-y := $(MAX98927_OBJS)
+
+obj-$(CONFIG_SND_SOC_TAS2557) += tas2557_dlkm.o
+tas2557_dlkm-y := $(TAS2557_OBJS)
 
 obj-$(CONFIG_SND_SOC_MSM_STUB) += stub_dlkm.o
 stub_dlkm-y := $(STUB_OBJS)
